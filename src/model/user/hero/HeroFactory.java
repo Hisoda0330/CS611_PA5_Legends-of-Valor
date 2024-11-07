@@ -56,7 +56,7 @@ public class HeroFactory implements UserFactory {
                 } else if (type.equals("Sorcerer")) {
                     heros.add(new Sorcerer(name, mp, strength, agility, dexterity, money, experience));
                 } else {
-                    heros.add(new Warrior(name, mp, strength, agility, dexterity, money, experience));
+                    heros.add(new Paladin(name, mp, strength, agility, dexterity, money, experience));
                 }
             }
         } catch (FileNotFoundException e) {
