@@ -1,7 +1,7 @@
 Name/level/damage/defense/dodge chance
 Cyrrollalee     7       500        800     75
 Brandobaris     3       100        250     30
-BigBad-Wolf     1        10        20      15
+BigBad-Wolf     1        10        10      15
 WickedWitch     2        20        20      25
 Aasterinian     4       200        500     45
 Chronepsish     6       450        750     60
