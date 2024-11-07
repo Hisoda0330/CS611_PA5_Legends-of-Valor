@@ -87,7 +87,7 @@ public class World {
                     sign = '#';
                 }
                 if (map[i][j].getType().equals("Market")) {
-                    sign = YELLOW + '$' + RESET;
+                    sign = '$';
                 }
 
                 str += " " + sign;
