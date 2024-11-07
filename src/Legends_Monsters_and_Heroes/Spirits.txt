@@ -9,4 +9,4 @@ Melchiresas     7       550       50      75
 Jormunngand     8       600       500     20
 Rakkshasass     9       550       900     35
 Taltecuhtli     10      300       200     50
-Casper          1       10        30      50
+Casper          1       10        0      10
