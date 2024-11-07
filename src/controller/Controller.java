@@ -116,8 +116,8 @@ public class Controller implements MessageObserver {
                         "A legendary team of heroes sets forth from all around the league to break the ancient curse, each armed with powers: the Warrior, Sorcerer, and \n" + //
                         "the Paladin comes together with incredible powers.\n" + //
                         "\n" + //
-                        "The heroes brave treacherous zones, battling monsters at every turn. Along the way, they find hidden markets to buy potions, weapons, spells, and armor essential for survival. \n" + //
-                        "Each different monster in the evil dungeon tests their skills uniquely—dragons breathe fire, exoskeletons have near-unbreakable armor, and spirits dodge\n" + //
+                        "The heroes brave treacherous zones, battling monsters at every turn. Along the way, they find hidden markets to buy potions, weapons, spells, and armor essential" + //
+                        "for survival. Each different monster in the evil dungeon tests their skills uniquely—dragons breathe fire, exoskeletons have near-unbreakable armor, and spirits dodge" + //
                         "and disappear, requiring both strategy and courage.\n" + //
                         "\n" + //
                         "With each victory, the heroes grow stronger, preparing for the ultimate confrontation with the dark force behind the evil curse in the dungeon. \n" + //
