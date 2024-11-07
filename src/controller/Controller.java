@@ -15,6 +15,9 @@ public class Controller implements MessageObserver {
 
     /** The game world. */
     private World world;
+    private static final String RED    = "\u001B[31m";    // RED
+    private static final String RESET  = "\u001B[0m";     // Text Reset
+    private static final String YELLOW = "\u001B[33m";    // YELLOW
 
     /**
      * create heros.
@@ -107,7 +110,29 @@ public class Controller implements MessageObserver {
      */
     public void showGameInfo() {
         String text = "";
-        text += "Welcome to game \"Monsters and Heroes\"." + "\n";
+        text += "\n"+ YELLOW+"Welcome to game \"Monsters and Heroes\":"+RESET + "\n";
+        
+        text += RED+"In a mystery dungeon where is full of darkness reigns, and monstrous creatures—dragons, armored exoskeletons, and elusive spirits—terrorize.\n" + //
+                        "A legendary team of heroes sets forth from all around the league to break the ancient curse, each armed with powers: the Warrior, Sorcerer, and \n" + //
+                        "the Paladin comes together with incredible powers.\n" + //
+                        "\n" + //
+                        "The heroes brave treacherous zones, battling monsters at every turn. Along the way, they find hidden markets to buy potions, weapons, spells, and armor essential for survival. \n" + //
+                        "Each different monster in the evil dungeon tests their skills uniquely—dragons breathe fire, exoskeletons have near-unbreakable armor, and spirits dodge\n" + //
+                        "and disappear, requiring both strategy and courage.\n" + //
+                        "\n" + //
+                        "With each victory, the heroes grow stronger, preparing for the ultimate confrontation with the dark force behind the evil curse in the dungeon. \n" + //
+                        "Together, they strive to defeat it and restore peace to the land.\n" + //
+                        "\n"+ RESET
+                        ;
+        
+
+        text += "\n"+ YELLOW+"GAME INFO:"+RESET + "\n";
+        text += RED + "*"+ RESET + " is the location of hero's party " + "\n";
+        text += "$ is the location of shop" + "\n";
+        text += "# is not accessible" + "\n";
+        text += ". is common area where possibly encounter monster" + "\n";
+
+        text += "\n"+ YELLOW+"HOW TO MOVE:"+RESET + "\n";
         text += "W/w: move up" + "\n";
         text += "A/a: move left" + "\n";
         text += "S/s: move down" + "\n";
@@ -115,6 +140,7 @@ public class Controller implements MessageObserver {
         text += "Q/q: quit game" + "\n";
         text += "I/i: show information" + "\n";
         text += "M/m: enter market" + "\n";
+
 
         System.out.println(text);
     }
