@@ -1,6 +1,6 @@
 Name/level/damage/defense/dodge chance
 Andrealphus     2       15        10      40
-Blinky          1       10        0       35
+Blinky          1       10        0       5
 Andromalius     3       100       150     25
 Chiang-shih     4       200       150     40
 FallenAngel     5       300       200     50
@@ -9,4 +9,4 @@ Melchiresas     7       550       50      75
 Jormunngand     8       600       500     20
 Rakkshasass     9       550       900     35
 Taltecuhtli     10      300       200     50
-Casper          1       10        0      10
+Casper          1       10        0       5
