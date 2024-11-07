@@ -1,5 +1,6 @@
-Guide,
-Required sections: Header, Files, Notes, How to compile and run, I/O Example
+Guide Readme
+
+Required sections: Header, Files, Program Advantage/Notes, How to compile and run, I/O Example
 
 # CS611-Assignment 4
 ## Legends Monsters and Heroes
@@ -12,10 +13,13 @@ Member:
 
 ## Files
 ---------------------------------------------------------------------------
-**src:**
+
+1. Legends_Monsters_and_Heroes folder: Use of the stats files that was provided in blackboard. But with a slightly twist of the attack and defense of the monsters for easier start and debug.
+
+**src/:**
 1. Game.java: Starts the game
 
-**controller:**
+**src/controller:**
 
 1. Controller.java: Implement main game controller, manages game world, hero creation, movement controls, and game commands. Also plays music and observe message for display.
 
@@ -25,7 +29,7 @@ Member:
 
 4. MusicPlayer.java: PLays background music using audio file music.wav.
 
-**model:**
+**src/model:**
 
 1. Constants.java: Stores constant stats for the game, such as exp increase percent.
 
@@ -35,13 +39,13 @@ Member:
 
 4. World.java: Represents the game world, modeled as an 8x8 grid with different types of space(inaccessible, market, and common). It initialize the world layout. 
 
-**model/hero/item:**
+**src/model/hero/item:**
 
 1. Item.java: Defines an abstract base class for items in game. Each item has a name, price, and level. 
 
 2. ItemFactory.java: Declares an ItemFactory interface for creating specific item instances, providing a way to instantiate different item types consistently.
 
-**model/hero/item/armor:**
+**src/model/hero/item/armor:**
 
 1. Armor.java: Defines the armor class, extends Item and implements DefenseAble. Represents how much damage armor reduce.
 
@@ -49,7 +53,7 @@ Member:
 
 3. DefenseAble.java: Interface represent item that provide defensive capabilities, like armor.
    
-**model/hero/item/potion:**
+**src/model/hero/item/potion:**
 
 1. EnhanceAble.java: Interface intended for potions that defines how a potion enhances a hero's attribute.
 
@@ -57,7 +61,7 @@ Member:
 
 3. PotionFactory.java: Implements ItemFactory to create Potion objects. Reads potion data from Potion.txt using FileLoader, storing detail on potions and their attribute effects.
    
-**model/hero/item/spell:**
+**src/model/hero/item/spell:**
 
 1. FireSpell.java: Extends Spell and represents a fire-based spell, magicAttack method reduces monster's defense.
 
@@ -71,7 +75,7 @@ Member:
 
 6. SpellFactory.java: Implements ItemFactory to create Spell objects. It loads spells from IceSpell.txt, FireSpells.txt, LightningSpells.txt, alternates loading spell from each list.
    
-**model/hero/item/weapon:**
+**src/model/hero/item/weapon:**
 
 1. AttackAble.java: An interface that returns the damage value of an attack-capable item, such as weapon.
 
@@ -79,7 +83,7 @@ Member:
 
 3. WeaponFactory.java: Implements ItemFactory to create Weapon instances. Loads weapon from Weaponry.txt using FileLoader and store in a list.
 
-**model/market:**
+**src/model/market:**
 
 1. Market.java: Represents a market that holds a list of item, provide methods to add, retrieve, and remove items, and display.
 
@@ -87,7 +91,7 @@ Member:
 
 3. RandomMarketFactory.java: Implements MarketFacotry to create markets with random items. Generates a market fills with 10 items randomly from WeaponFactory, ArmorFacotry, PotionFactory, and SpellFactory.
 
-**model/space:**
+**src/model/space:**
 
 1. CommonSpaceActivity.java: Defines the behavior in a common space where hero may encounter monsters and engage in battles. If battle occurs, it creates a monster group and manages rounds of combat, and rewards in exp and gold if win.
                              The class include methods for battle actions, such as hero attacks, spell casting, using potions, and equipping items.
@@ -100,7 +104,7 @@ Member:
 
 5. SpaceActivity.java: An interface for space activities that takes a hero group and triggers actions when they enter a specific space.
 
-**model/user:**
+**src/model/user:**
 
 1. User.java: A base class representing users, such as heroes or monsters, with attributes like name, level, and hp. Includes methods for taking damage, healing, leveling up, and managing message notifications for actions, such as receiving damage or leveling up.
 
@@ -108,7 +112,7 @@ Member:
 
 3. UserGroup.java: A generic container for managing a group of User instances (ex. heroes or monsters). It iterates to create hero group and check if user are defeated, and retrieve non-defeated heros for battle.
 
-**model/user/hero:**
+**src/model/user/hero:**
 
 1. Hero.java: Extends User to represent a hero with additional attributes(exp,mp,gold,strength,dex.,agility). Also controlls the inventory and equipped items. Also handles leveling up, using potion, equipping items, handling battle prep and outcomes. Hero regain 
               HP and MP each battle, level up based on exp, and use different equipment to enhance attack and defense.
@@ -133,7 +137,7 @@ Member:
 
 11. WarriorSkillIncreaseStrategy.java: Implement HeroIncreaseStrategy for Paladin hero type. Defines Paladin’s attributes (strength, agility, dexterity) increased when level up, favoring particular attributes based on Warrior hero type.
 
-**model/user/monster:**
+**src/model/user/monster:**
 
 1. Dragon.java: It represent Dragon type monsters. It inherits from Monster class and passes its stats(name,level,damage,defense,dodge) to the superclass.
 
@@ -164,13 +168,30 @@ Member:
 - I/i: show information
 - M/m: enter market
 
-1. Contains dungeon music to match the theme of the game.
-2. Adds 
+**Enhance User Experience:**
 
+1. Contains dungeon music to match the theme of the game.
+2. Adds background story of the game and summuarize the goal of the game.
+3. Provides simple guideline of how to play the game.
+4. Provides easy and simple controlls for the game, allowing user to get start with the game easier.
+5. Validates each user input, preventing the game to crash when player enter wrong input, and prevent it to crash when don't play by the rule. such as going out of the board, or inside the restricted area. 
+
+
+**Good OO Design:**
+
+1. Classes like Hero, Monster, Item, Space, and Inventory have their distinct roles. Separates the file allows to locate, debug, and update without affecting unrelated parts
+2. Each class encapsulates specific attributes and behaviors, so it allows each class to focus on its responsibility and easier management.
+3. Class Hero, Monster, and Item uses inheritance with subclasses(Warrior, Sorcercer, Dragon) inheriting common behaviors and traits.
+4. Use polymorphism to allow the use of interface and abstract classes.(Item, SpaceActivity, UserFactory, etc..) to define behaviors. Allows flexible interaction and behaviors.
+5. Use of design pattern, 
+   - Factory Pattern: (HeroFactory, MonsterFactory, ItemFactory) create their own object without specifying exact class type. With the object creation, it is easy to add new hero type or item without modifying the current code.
+   - Strategy Pattern: (HeroIncreaseStrategy, WarriorIncreaseStrategy, SorcercerSkillIncreaseStrategy) allow vary level up behaviors based on hero type. It is flexible for future behavior change without modifying hero class itself.
+   - Observer Pattern: (MessageObserver interface and notifyMessage method) helps object to receive message about the game event, can be updated or expand mutiple observers in the future. 
+6. The naming of each file represents specific aspect of the game, making it clear and easy to locate within the code. 
+7.  The program is easy to extend with the use of OOD design principles and separation of files within folders help keep methods concise and classes focused.
 
 ## How to compile and run
 ---------------------------------------------------------------------------
-
 
 1. Navigate to the directory "src" OR (cd src)
 2. Run in src dir:
