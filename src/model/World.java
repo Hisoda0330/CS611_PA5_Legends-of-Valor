@@ -90,7 +90,7 @@ public class World {
 
                 str += " " + sign;
                 if (heroGroup.getSpace() == map[i][j]) {
-                    str += '*';
+                    str += RED +'*'+ RESET;
                 } else {
                     str += ' ';
                 }
