@@ -16,8 +16,10 @@ import model.user.hero.HeroGroup;
  * Represents the game model.
  */
 public class World {
-    private static final String RED = "\u001B[31m";   // RED
-    private static final String RESET  = "\u001B[0m"; // Text Reset
+    private static final String RED    = "\u001B[31m";    // RED
+    private static final String RESET  = "\u001B[0m";     // Text Reset
+    private static final String YELLOW = "\u001B[33m";    // YELLOW
+
     private Space[][] map; // 8*8 20% inaccessible spaces, 30% market spaces, and 50% common spaces.
     private HeroGroup heroGroup;
 
@@ -85,7 +87,7 @@ public class World {
                     sign = '#';
                 }
                 if (map[i][j].getType().equals("Market")) {
-                    sign = '$';
+                    sign = YELLOW + '$' + RESET;
                 }
 
                 str += " " + sign;
