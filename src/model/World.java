@@ -1,5 +1,13 @@
 package model;
 
+import static controller.Color.BLACK;
+import static controller.Color.BLUE;
+import static controller.Color.CYAN;
+import static controller.Color.GREEN;
+import static controller.Color.PURPLE;
+import static controller.Color.RED;
+import static controller.Color.RESET;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,6 +21,7 @@ import model.user.hero.HeroFactory;
 import model.user.monster.Monster;
 import model.user.monster.MonsterFactory;
 
+import controller.Color.*;
 /**
  * Represents the game model.
  */
@@ -116,9 +125,9 @@ public class World {
         heros.get(0).setSpace(map[7][0]);
         heros.get(1).setSpace(map[7][3]);
         heros.get(2).setSpace(map[7][6]);
-        heros.get(0).setLabel("H1");
-        heros.get(1).setLabel("H2");
-        heros.get(2).setLabel("H3");
+        heros.get(0).setLabel(GREEN + "H1"+ RESET);
+        heros.get(1).setLabel(CYAN + "H2"+ RESET); 
+        heros.get(2).setLabel(PURPLE + "H3" + RESET);
 
         // set monsters
         monsters = new ArrayList<Monster>();
@@ -128,9 +137,9 @@ public class World {
         monsters.get(0).setSpace(map[0][1]);
         monsters.get(1).setSpace(map[0][4]);
         monsters.get(2).setSpace(map[0][7]);
-        monsters.get(0).setLabel("M1");
-        monsters.get(1).setLabel("M2");
-        monsters.get(2).setLabel("M3");
+        monsters.get(0).setLabel(RED+"M1"+RESET);
+        monsters.get(1).setLabel(RED+"M2"+RESET);
+        monsters.get(2).setLabel(RED+"M3"+RESET);
         nextMonsterId = 4;
     }
 
@@ -272,7 +281,7 @@ public class World {
                 s2 += "| ";
 
                 if (symbol == 'I') {
-                    s2 += "X X X ";
+                    s2 += BLACK+"X X X "+RESET;
                 } else {
                     if (space.getHero() != null) {
                         s2 += space.getHero().getLabel();

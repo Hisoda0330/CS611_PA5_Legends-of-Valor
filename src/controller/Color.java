@@ -9,4 +9,5 @@ public class Color {
         public static final String BLUE   = "\u001B[34m";   // BLUE
         public static final String PURPLE = "\u001B[35m";   // PURPLE
         public static final String CYAN   = "\u001B[36m";   // CYAN
+        public static final String BLACK   = "\u001B[30m";  // BLACK
 }

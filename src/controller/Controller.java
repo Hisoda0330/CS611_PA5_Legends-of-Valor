@@ -87,9 +87,9 @@ public class Controller implements MessageObserver {
                     if (!attackCommand.runCommand()) {
                         // if no attacking, monster move
                         if (!moveCommand.runCommand()) {
-                            System.out.println("Monster " + monster.getLabel() + " cannot move south.");
+                            System.out.println("Monster " + monster.getLabel() + " cannot move down.");
                         } else {
-                            System.out.println("Monster " + monster.getLabel() + " move south.");
+                            System.out.println("Monster " + monster.getLabel() + " move down.");
                         }
                     }
                 }
