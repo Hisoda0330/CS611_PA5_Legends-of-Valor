@@ -1,11 +1,17 @@
 package model.user;
 
 import controller.MessageObserver;
+import model.space.Space;
 
 /**
  * The base class of hero and monster.
  */
 public class User {
+    private Space spawnSpace;
+
+    private Space space;
+    private String label;
+
     private String name;
 
     private int level;
@@ -21,6 +27,37 @@ public class User {
      */
     public User(String name) {
         this(name, 1);
+    }
+
+    /**
+     * Set the space.
+     *
+     * @param space the space to set
+     */
+    public void setSpace(Space space) {
+        if (this.space == null) {
+            spawnSpace = space;
+        }
+
+        this.space = space;
+    }
+
+    /**
+     * Get the spawnSpace.
+     *
+     * @return the spawnSpace
+     */
+    public Space getSpawnSpace() {
+        return spawnSpace;
+    }
+
+    /**
+     * Get the space.
+     *
+     * @return the space
+     */
+    public Space getSpace() {
+        return space;
     }
 
     /**
@@ -44,11 +81,28 @@ public class User {
         hp = level * 100;
     }
 
+    /**
+     * Set the label.
+     *
+     * @param label the label to set
+     */
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    /**
+     * Get the label.
+     *
+     * @return the label
+     */
+    public String getLabel() {
+        return label;
+    }
+
     public void levelUp() {
         level++;
         hp = level * 100;
     }
-
 
     public void notifyMessage(String message) {
         if (messageObserver != null) {
@@ -80,6 +134,9 @@ public class User {
      * @return the name
      */
     public String getName() {
+        if (label != null) {
+            return label + "(" + name + ")";
+        }
         return name;
     }
 

@@ -1,5 +1,6 @@
 package model.user.monster;
 
+import model.space.Space;
 import model.user.User;
 
 /**
@@ -24,10 +25,18 @@ public class Monster extends User {
         text += "Monster " + getName() + "\n";
         text += String.format("%-12s%-12s%-12s%-12s%-12s\n", "Level", "HP", "Damage", "Defense", "Dodge");
 
-        text += String.format("%-12s%-12s%-12s%-12s%-12s\n", "" + getLevel(), "" + getHp(),
-                "" + getDamage(), "" + getDefense(),
-                String.format("%d%%", dodge));
+        text += String.format("%-12s%-12s%-12s%-12s%-12s\n", "" + getLevel(), "" + getHp(), "" + getDamage(),
+                "" + getDefense(), String.format("%d%%", dodge));
         return text.trim();
+    }
+
+    @Override
+    public void setSpace(Space space) {
+        if (getSpace() != null) {
+            getSpace().setMonster(null);
+        }
+        super.setSpace(space);
+        space.setMonster(this);
     }
 
     /**

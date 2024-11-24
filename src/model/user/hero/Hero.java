@@ -3,12 +3,14 @@ package model.user.hero;
 import model.Constants;
 import model.hero.item.armor.Armor;
 import model.hero.item.weapon.Weapon;
+import model.space.Space;
 import model.user.User;
 
 /**
  * Represents a hero.
  */
 public class Hero extends User {
+    private int fullMp;
 
     private int experience;
 
@@ -22,9 +24,6 @@ public class Hero extends User {
 
     private HeroIncreaseStrategy increaseStrategy;
 
-    private int hpBeforeBattle;
-    private int mpBeforeBattle;
-
     private Weapon weapon1;
     private Weapon weapon2;
     private Armor armor;
@@ -34,6 +33,7 @@ public class Hero extends User {
             HeroIncreaseStrategy increaseStrategy) {
         super(name);
         this.mp = mp;
+        fullMp = mp;
 
         this.gold = money;
 
@@ -46,22 +46,42 @@ public class Hero extends User {
         inventory = new Inventory();
     }
 
-    public void beforeBattle() {
-        hpBeforeBattle = getHp();
-        mpBeforeBattle = getMp();
-    }
+    /**
+     * respawn.
+     */
+    public void respawn() {
+        System.out.println("Hero " + getName() + " respawn in the nexus space");
+        setHp(getLevel() * 100);
+        mp = fullMp;
 
-    public void afterBattle() {
-        if (isDefeated()) {
-            revive();
+        Space space = getSpawnSpace();
+
+        if (getSpace() != null) {
+            getSpace().setHero(null);
         }
+
+        super.setSpace(space);
+        space.setHero(this);
     }
 
-    public void revive() {
-        setHp(hpBeforeBattle / 2);
-        mp = mpBeforeBattle / 2;
+    @Override
+    public void setSpace(Space space) {
+        if (getSpace() != null) {
+            getSpace().leftAction(this);
+            getSpace().setHero(null);
+        }
 
-        notifyMessage("Hero " + getName() + " revived with " + getHp() + " HP and " + mp + " MP.");
+        super.setSpace(space);
+        space.setHero(this);
+    }
+
+    /**
+     * Get the atMarket.
+     *
+     * @return the atMarket
+     */
+    public boolean isAtMarket() {
+        return getSpace().getSymbol() == 'N';
     }
 
     public void regainHPMP() {
@@ -69,6 +89,9 @@ public class Hero extends User {
         int amount2 = (int) (mp * 0.1);
         addHp(amount1);
         mp += amount2;
+        if (mp > fullMp) {
+            fullMp = mp;
+        }
 
         notifyMessage("Hero " + getName() + " regain " + amount1 + " HP and " + amount2 + " MP");
     }
@@ -171,6 +194,17 @@ public class Hero extends User {
     }
 
     /**
+     * Decrease the strength by a given percent.
+     *
+     * @param percent the percent to decrease.
+     */
+    public void decreaseStrength(double percent) {
+        int a = (int) (strength * percent);
+        notifyMessage("Hero " + getName() + " decreased " + a + " strength.");
+        strength -= a;
+    }
+
+    /**
      * Increase the dexterity by a given percent.
      *
      * @param percent the percent to increase.
@@ -179,6 +213,17 @@ public class Hero extends User {
         int a = (int) (dexterity * percent);
         notifyMessage("Hero " + getName() + " increased " + a + " dexterity.");
         dexterity += a;
+    }
+
+    /**
+     * Decrease the dexterity by a given percent.
+     *
+     * @param percent the percent to decrease.
+     */
+    public void decreaseDexterity(double percent) {
+        int a = (int) (dexterity * percent);
+        notifyMessage("Hero " + getName() + " decreased " + a + " dexterity.");
+        dexterity -= a;
     }
 
     /**
@@ -193,6 +238,17 @@ public class Hero extends User {
     }
 
     /**
+     * Decrease the agility by a given percent.
+     *
+     * @param percent the percent to decrease.
+     */
+    public void decreaseAgility(double percent) {
+        int a = (int) (agility * percent);
+        notifyMessage("Hero " + getName() + " decreased " + a + " agility.");
+        agility -= a;
+    }
+
+    /**
      * Increase the mp by a given percent.
      *
      * @param percent the percent to increase.
@@ -201,6 +257,10 @@ public class Hero extends User {
         int a = (int) (mp * percent);
         notifyMessage("Hero " + getName() + " increased " + a + " MP.");
         mp += a;
+        if (mp > fullMp) {
+            fullMp = mp;
+        }
+
     }
 
     /**
@@ -216,6 +276,10 @@ public class Hero extends User {
      */
     public void potionForMP(int effectAmount) {
         mp += effectAmount;
+        if (mp > fullMp) {
+            fullMp = mp;
+        }
+
         notifyMessage("Hero " + getName() + "'s MP increased " + effectAmount + " by potion");
     }
 
@@ -367,4 +431,5 @@ public class Hero extends User {
         }
         return armor.getDamageReduction();
     }
+
 }

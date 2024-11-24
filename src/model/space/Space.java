@@ -1,17 +1,19 @@
 package model.space;
 
-import model.user.hero.HeroGroup;
+import model.Coordinate;
+import model.user.hero.Hero;
+import model.user.monster.Monster;
 
 /**
  *
  */
 public class Space {
+    private Coordinate position;
+    private Hero hero;
+    private Monster monster;
+
     private String type;
 
-    /** row position */
-    private int row;
-    /** column position */
-    private int col;
     /** action of space */
     private SpaceActivity activity;
 
@@ -23,14 +25,30 @@ public class Space {
      * @param action
      */
     public Space(int row, int col, String type, SpaceActivity activity) {
-        this.row = row;
-        this.col = col;
+        this.position = new Coordinate(row, col);
         this.activity = activity;
         this.type = type;
     }
 
-    public void action(HeroGroup heroGroup) {
-        activity.action(heroGroup, this);
+    public boolean enterAction(Hero hero, Space space) {
+        return activity.enterAction(hero, space);
+    }
+
+    public void leftAction(Hero hero) {
+        activity.leftAction(hero);
+    }
+
+    public char getSymbol() {
+        return type.toUpperCase().charAt(0);
+    }
+
+    /**
+     * Get the position.
+     *
+     * @return the position
+     */
+    public Coordinate getPosition() {
+        return position;
     }
 
     /**
@@ -39,7 +57,7 @@ public class Space {
      * @return the row
      */
     public int getRow() {
-        return row;
+        return position.getRow();
     }
 
     /**
@@ -48,7 +66,7 @@ public class Space {
      * @return the col
      */
     public int getCol() {
-        return col;
+        return position.getCol();
     }
 
     /**
@@ -67,5 +85,50 @@ public class Space {
      */
     public SpaceActivity getActivity() {
         return activity;
+    }
+
+    /**
+     * Set the activity.
+     *
+     * @param activity the activity to set
+     */
+    public void setActivity(SpaceActivity activity) {
+        this.activity = activity;
+    }
+
+    /**
+     * Set the hero.
+     *
+     * @param hero the hero to set
+     */
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
+
+    /**
+     * Set the monster.
+     *
+     * @param monster the monster to set
+     */
+    public void setMonster(Monster monster) {
+        this.monster = monster;
+    }
+
+    /**
+     * Get the hero.
+     *
+     * @return the hero
+     */
+    public Hero getHero() {
+        return hero;
+    }
+
+    /**
+     * Get the monster.
+     *
+     * @return the monster
+     */
+    public Monster getMonster() {
+        return monster;
     }
 }
