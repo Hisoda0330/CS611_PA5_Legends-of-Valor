@@ -2,14 +2,19 @@ Guide Readme
 
 Required sections: Header, Files, Program Advantage/Notes, How to compile and run, I/O Example
 
-# CS611-Assignment 4
-## Legends Monsters and Heroes
+# CS611-Assignment 5
+## Legend of Valor
 ---------------------------------------------------------------------------
 
-Member:
+Member 1:
 - Name: Jinpeng Huang
 - Email: jinpeng@bu.edu
 - Student ID: U19568777
+
+Member 2:
+- Name: 
+- Email: 
+- Student ID: 
 
 ## Files
 ---------------------------------------------------------------------------
