@@ -1,15 +1,12 @@
 package controller.command;
 
 import java.util.List;
-
-import controller.Input;
-import model.Coordinate;
 import model.World;
 import model.space.Space;
 import model.user.hero.Hero;
 
 /**
- * The Move command.
+ * The Move command.To implement the teleport for heroes.
  */
 public class TeleportCommand extends KeyboardCommand {
     private Hero hero;

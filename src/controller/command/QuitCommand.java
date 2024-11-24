@@ -3,7 +3,7 @@ package controller.command;
 import model.World;
 
 /**
- * The Move command.
+ * The Move command. The class can let the game quit immediately when the player press "Q"
  */
 public class QuitCommand extends KeyboardCommand {
     private World world;

@@ -5,6 +5,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioInputStream;
 import java.io.File;
 
+// The class plays background music using audio file music.wav.
 public class MusicPlayer {
     private static boolean running = true;
 

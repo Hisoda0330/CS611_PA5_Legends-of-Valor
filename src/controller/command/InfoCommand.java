@@ -5,7 +5,7 @@ import model.user.hero.Hero;
 import model.user.monster.Monster;
 
 /**
- * The Move command.
+ * The Move command.Class to display the information.
  */
 public class InfoCommand extends KeyboardCommand {
     private World world;

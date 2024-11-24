@@ -20,7 +20,8 @@ import model.user.hero.Hero;
 import model.user.monster.Monster;
 
 /**
- *
+ *  Implement main game controller, manages game world, hero creation, movement controls, and game commands.
+ *  Also plays music and observe message for display.
  */
 public class Controller implements MessageObserver {
 

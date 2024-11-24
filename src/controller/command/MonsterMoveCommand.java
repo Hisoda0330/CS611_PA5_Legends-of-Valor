@@ -5,20 +5,14 @@ import model.space.Space;
 import model.user.monster.Monster;
 
 /**
- * The Move command.
+ * The Move command.Monster movement control class
  */
 public class MonsterMoveCommand extends KeyboardCommand {
     private Monster monster;
     private World world;
     private char direction;
 
-    /**
-     * Constructor.
-     *
-     * @param hero
-     * @param world
-     * @param direction
-     */
+
     public MonsterMoveCommand(Monster monster, World world, char direction) {
         this.monster = monster;
         this.world = world;

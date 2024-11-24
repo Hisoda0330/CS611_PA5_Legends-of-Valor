@@ -12,27 +12,37 @@ Member 1:
 - Student ID: U19568777
 
 Member 2:
-- Name: 
-- Email: 
-- Student ID: 
+- Name: Zishuo Liu
+- Email: zsliu@bu.edu
+- Student ID: U22679932
 
 ## Files
 ---------------------------------------------------------------------------
 
-1. Legends_Monsters_and_Heroes folder: Use of the stats files that was provided in blackboard. But with a slightly twist of the attack and defense of the monsters for easier start and debug.
+1. Legends_Monsters_and_Heroes folder: Use of the stats files that was provided in blackboard. But with a slight twist of the attack and defense of the monsters for easier start and debug.
 
 **src/:**
-1. Game.java: Starts the game
+1. Game.java: The interface to start the games
+
+**src/controller:**
+1. AttackCommand.java:
+
+2. CastSpell.java:
+
+3. ChangeArmorCommand 
+
 
 **src/controller:**
 
-1. Controller.java: Implement main game controller, manages game world, hero creation, movement controls, and game commands. Also plays music and observe message for display.
+1. Controller.java: Implement main game controller, manages game world, hero creation, movement controls, and commands of game. Also plays music and observe message for display.
 
 2. Input.java: Handles user input, prompts user to enter correct type of input, such as integer or character. 
 
 3. MessageObserver.java: Defines an interface for observing messages, respond to messages for display notifications or logs.
 
-4. MusicPlayer.java: PLays background music using audio file music.wav.
+4. MusicPlayer.java: Plays background music using audio file music.wav.
+
+5. Color.java:  Add the necessary bold color to the character display in the screen. 
 
 **src/model:**
 
@@ -119,7 +129,7 @@ Member 2:
 
 **src/model/user/hero:**
 
-1. Hero.java: Extends User to represent a hero with additional attributes(exp,mp,gold,strength,dex.,agility). Also controlls the inventory and equipped items. Also handles leveling up, using potion, equipping items, handling battle prep and outcomes. Hero regain 
+1. Hero.java: Extends User to represent a hero with additional attributes(exp,mp,gold,strength,dex.,agility). Also controls the inventory and equipped items. Also handles leveling up, using potion, equipping items, handling battle prep and outcomes. Hero regain 
               HP and MP each battle, level up based on exp, and use different equipment to enhance attack and defense.
 
 2. HeroFactory.java: Implements UserFactory to create Hero instances by reading data files from Warriors.txt, Sorcerers.txt, Paladins.txt and store in a list of heroes. Use createUser() randomly selects and removes a hero from the list.
@@ -144,9 +154,9 @@ Member 2:
 
 **src/model/user/monster:**
 
-1. Dragon.java: It represent Dragon type monsters. It inherits from Monster class and passes its stats(name,level,damage,defense,dodge) to the superclass.
+1. Dragon.java: It represents Dragon type monsters. It inherits from Monster class and passes its stats(name,level,damage,defense,dodge) to the superclass.
 
-2. Exoskeleton.java: It represent Exoskeleton type monsters. It inherits from Monster class and passes its stats(name,level,damage,defense,dodge) to the superclass.
+2. Exoskeleton.java: It represents Exoskeleton type monsters. It inherits from Monster class and passes its stats(name,level,damage,defense,dodge) to the superclass.
 
 3. Monster.java: Represents a generic monster with stats for damage, defense, and dodge. It has methods to decrease each attribute by a certain percentage, used when monsters are affected by different types of spells.
 
@@ -154,7 +164,7 @@ Member 2:
 
 5. MonsterGroup.java: Extends UserGroup to manage a group of monsters, specifically formatting the monster group’s details for display.
 
-6. Spirit.java: It represent Spirit type monsters. It inherits from Monster class and passes its stats(name,level,damage,defense,dodge) to the superclass.
+6. Spirit.java: It represents Spirit type monsters. It inherits from Monster class and passes its stats(name,level,damage,defense,dodge) to the superclass.
 
 ## Program Advantages/Notes
 ---------------------------------------------------------------------------
@@ -201,7 +211,7 @@ Member 2:
 1. Navigate to the directory "src" OR (cd src)
 2. Run in src dir:
    1. javac *.java
-   2. java Game.java
+   2. java Game
 
 ## Input/Output Example
 ---------------------------------------------------------------------------

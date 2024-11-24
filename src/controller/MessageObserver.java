@@ -1,7 +1,7 @@
 package controller;
 
 /**
- * Message observer.
+ * Message observer. Defines an interface for observing messages, respond to messages for display notifications or logs.
  */
 public interface MessageObserver {
 

@@ -1,5 +1,7 @@
 package controller;
 
+
+// The class to add the necessary bold color to the character display in the screen.
 public class Color {
         // ANSI color codes
         public static final String RESET  = "\u001B[0m";    // Text Reset
