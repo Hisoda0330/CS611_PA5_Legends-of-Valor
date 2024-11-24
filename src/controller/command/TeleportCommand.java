@@ -2,9 +2,7 @@ package controller.command;
 
 import java.util.List;
 
-import controller.Input;
-import model.Coordinate;
-import model.World;
+import model.ValorWorld;
 import model.space.Space;
 import model.user.hero.Hero;
 
@@ -13,14 +11,14 @@ import model.user.hero.Hero;
  */
 public class TeleportCommand extends KeyboardCommand {
     private Hero hero;
-    private World world;
+    private ValorWorld world;
 
     /**
      * Constructor.
      *
      * @param hero
      */
-    public TeleportCommand(Hero hero, World world) {
+    public TeleportCommand(Hero hero, ValorWorld world) {
         this.hero = hero;
         this.world = world;
     }

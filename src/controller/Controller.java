@@ -1,146 +1,107 @@
 package controller;
 
-import controller.command.AttackCommand;
-import controller.command.CastSpellCommand;
-import controller.command.ChangeArmorCommand;
-import controller.command.ChangeWeaponCommand;
-import controller.command.HelpCommand;
-import controller.command.InfoCommand;
-import controller.command.KeyboardCommand;
-import controller.command.MarketCommand;
-import controller.command.MonsterAttackCommand;
-import controller.command.MonsterMoveCommand;
-import controller.command.MoveCommand;
-import controller.command.QuitCommand;
-import controller.command.RecallCommand;
-import controller.command.TeleportCommand;
-import controller.command.UsePotionCommand;
 import model.World;
+import model.space.Space;
+import model.space.activity.MarketSpaceActivity;
+import model.user.UserFactory;
 import model.user.hero.Hero;
-import model.user.monster.Monster;
+import model.user.hero.HeroFactory;
+import model.user.hero.HeroGroup;
 
 /**
  *
  */
-public class Controller implements MessageObserver {
+public class Controller implements MessageObserver, IController {
 
     /** The game world. */
     private World world;
-
-    private int everyRoundsForMonster = 8; // every 8 rounds, add monster
+    private static final String RED    = "\u001B[31m";    // RED
+    private static final String RESET  = "\u001B[0m";     // Text Reset
+    private static final String YELLOW = "\u001B[33m";    // YELLOW
 
     /**
-     *
+     * create heros.
      */
-    public Controller() {
-        world = new World();
+    private void createHeroParty() {
+        int size = Input.enterInt("Enter the size of hero party", 1, 3);
 
-        for (Hero hero : world.getHeros()) {
+        UserFactory heroFactory = new HeroFactory();
+        HeroGroup heroGroup = new HeroGroup(size, heroFactory);
+        for (Hero hero : heroGroup) {
             hero.registerMessageObserver(this);
         }
-
-        System.out.println("Select difficulity: ");
-        System.out.println("1. Easy");
-        System.out.println("2. Medium");
-        System.out.println("3. Hard");
-        int index = Input.enterInt("Please select", 1, 3);
-
-        // new spawn every 6 rounds, medium: every 4 rounds, hard: every 2 rounds
-        if (index == 1) {
-            everyRoundsForMonster = 6;
-        }
-        if (index == 2) {
-            everyRoundsForMonster = 4;
-        }
-        if (index == 3) {
-            everyRoundsForMonster = 2;
-        }
+        world = new World(heroGroup);
     }
 
     public void play() {
         MusicPlayer.play();
 
-        int round = 1;
+        createHeroParty();
 
-        new InfoCommand(world).runCommand();
+        while (true) {
+            System.out.println(world.toString());
 
-        while (!world.isGameover()) {
-            // one turn
-            world.beforeTurn();
+            String validCommands = "wasdqi";
+            if (world.getHeroGroup().isAtMarket()) {
+                validCommands += "m";
+            }
 
-            // hero move
-            for (Hero hero :  world.getHeros()) {
-                boolean done = false;
-                while (!done && !world.isGameover()) {
-                    System.out.println("\n" + hero.getLabel() + "'s turn.");
-                    char control = Input.enterChar("wasdkcueotrqimh");
-                    KeyboardCommand command = getCommand(hero, control);
-                    done = command.runCommand();
+            char control = Input.enterChar(validCommands);
+
+            if ("wasd".contains("" + control)) {
+                move(control);
+
+                if (world.getHeroGroup().allDefeated()) {
+                    break;
                 }
+            } else if (control == 'q') {
+                System.out.println("\nBye!");
+                break;
+            } else if (control == 'i') {
+                System.out.println("\n" + world.getHeroGroup().toString());
+            } else if (control == 'm') {
+                MarketSpaceActivity marketSpaceActivity = (MarketSpaceActivity) world.getHeroGroup().getSpace()
+                        .getActivity();
+                marketSpaceActivity.marketMenu(world.getHeroGroup());
             }
 
-            // monster move
-            for (Monster monster : world.getMonsters()) {
-                if (!world.isGameover()) {
-                    KeyboardCommand moveCommand = new MonsterMoveCommand(monster, world, 's');
-                    KeyboardCommand attackCommand = new MonsterAttackCommand(monster, world);
-                    if (!attackCommand.runCommand()) {
-                        // if no attacking, monster move
-                        if (!moveCommand.runCommand()) {
-                            System.out.println("Monster " + monster.getLabel() + " cannot move down.");
-                        } else {
-                            System.out.println("Monster " + monster.getLabel() + " move down.");
-                        }
-                    }
-                }
-            }
-
-            // end turn
-            world.endTurn();
-
-            if (round % everyRoundsForMonster == 0) {
-                world.addThreeNewMonsters();
-            }
-            round++;
+            System.out.println();
         }
 
         MusicPlayer.stop();
-
-        if (world.isHeroWin()) {
-            System.out.println("Heros won!");
-        } else if (world.isMonsterWin()) {
-            System.out.println("Monsters won!");
-        }
     }
 
-    private KeyboardCommand getCommand(Hero hero, char control) {
-        if ("wasd".contains("" + control)) {
-            return new MoveCommand(hero, world, control);
-        } else if (control == 'q') {
-            return new QuitCommand(world);
-        } else if (control == 'i') {
-            return new InfoCommand(world);
-        } else if (control == 'm') {
-            return new MarketCommand(hero, world.getMarkets()[hero.getSpace().getCol()]);
-        } else if (control == 'h') {
-            return new HelpCommand();
-        } else if (control == 'k') {
-            return new AttackCommand(hero, world);
-        } else if (control == 'c') {
-            return new CastSpellCommand(hero, world);
-        } else if (control == 'u') {
-            return new UsePotionCommand(hero);
-        } else if (control == 'e') {
-            return new ChangeWeaponCommand(hero);
-        } else if (control == 'o') {
-            return new ChangeArmorCommand(hero);
-        }  else if (control == 't') {
-            return new TeleportCommand(hero, world);
-        } else if (control == 'r') {
-            return new RecallCommand(hero);
-        }else {
-            System.err.println("Invalid control " + control);
-            return null;
+    /**
+     * @param control
+     *
+     */
+    private void move(char control) {
+        // move up
+        Space space = world.getHeroGroup().getSpace();
+        int row = space.getRow();
+        int col = space.getCol();
+
+        int nextRow = row;
+        int nextCol = col;
+
+        if (control == 'w') {
+            nextRow--;
+        }
+        if (control == 's') {
+            nextRow++;
+        }
+        if (control == 'a') {
+            nextCol--;
+        }
+        if (control == 'd') {
+            nextCol++;
+        }
+
+        Space nextSpace = world.getSpace(nextRow, nextCol);
+        if (nextSpace == null) {
+            System.out.println("\nCannot go out of the world!");
+        } else {
+            nextSpace.action(world.getHeroGroup());
         }
     }
 
@@ -148,7 +109,40 @@ public class Controller implements MessageObserver {
      * Show welcome info.
      */
     public void showGameInfo() {
-        new HelpCommand().runCommand();
+        String text = "";
+        text += "\n"+ YELLOW+"Welcome to game \"Monsters and Heroes\":"+RESET + "\n";
+
+        text += RED+"In a mystery dungeon where is full of darkness reigns, and monstrous creatures—dragons, armored exoskeletons, and elusive spirits—terrorize.\n" + //
+                        "A legendary team of heroes sets forth from all around the league to break the ancient curse, each armed with powers: the Warrior, Sorcerer, and \n" + //
+                        "the Paladin comes together with incredible powers.\n" + //
+                        "\n" + //
+                        "The heroes brave treacherous zones, battling monsters at every turn. Along the way, they find hidden markets to buy potions, weapons, spells, and armor essential" + //
+                        "for survival. Each different monster in the evil dungeon tests their skills uniquely—dragons breathe fire, exoskeletons have near-unbreakable armor, and spirits dodge" + //
+                        "and disappear, requiring both strategy and courage.\n" + //
+                        "\n" + //
+                        "With each victory, the heroes grow stronger, preparing for the ultimate confrontation with the dark force behind the evil curse in the dungeon. \n" + //
+                        "Together, they strive to defeat it and restore peace to the land.\n" + //
+                        "\n"+ RESET
+                        ;
+
+
+        text += "\n"+ YELLOW+"GAME INFO:"+RESET + "\n";
+        text += RED + "*"+ RESET + " is the location of hero's party " + "\n";
+        text += "$ is the location of shop" + "\n";
+        text += "# is not accessible" + "\n";
+        text += ". is common area where possibly encounter monster" + "\n";
+
+        text += "\n"+ YELLOW+"HOW TO MOVE:"+RESET + "\n";
+        text += "W/w: move up" + "\n";
+        text += "A/a: move left" + "\n";
+        text += "S/s: move down" + "\n";
+        text += "D/d: move right" + "\n";
+        text += "Q/q: quit game" + "\n";
+        text += "I/i: show information" + "\n";
+        text += "M/m: enter market" + "\n";
+
+
+        System.out.println(text);
     }
 
     @Override

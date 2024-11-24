@@ -1,14 +1,14 @@
 package controller.command;
 
-import model.World;
+import model.ValorWorld;
 
 /**
  * The Move command.
  */
 public class QuitCommand extends KeyboardCommand {
-    private World world;
+    private ValorWorld world;
 
-    public QuitCommand(World world) {
+    public QuitCommand(ValorWorld world) {
         this.world = world;
     }
 

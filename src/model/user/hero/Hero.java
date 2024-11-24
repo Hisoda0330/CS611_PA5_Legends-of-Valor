@@ -24,6 +24,9 @@ public class Hero extends User {
 
     private HeroIncreaseStrategy increaseStrategy;
 
+    private int hpBeforeBattle;
+    private int mpBeforeBattle;
+
     private Weapon weapon1;
     private Weapon weapon2;
     private Armor armor;
@@ -46,6 +49,23 @@ public class Hero extends User {
         inventory = new Inventory();
     }
 
+    public void beforeBattle() {
+        hpBeforeBattle = getHp();
+        mpBeforeBattle = getMp();
+    }
+
+    public void afterBattle() {
+        if (isDefeated()) {
+            revive();
+        }
+    }
+
+    public void revive() {
+        setHp(hpBeforeBattle / 2);
+        mp = mpBeforeBattle / 2;
+
+        notifyMessage("Hero " + getName() + " revived with " + getHp() + " HP and " + mp + " MP.");
+    }
     /**
      * respawn.
      */

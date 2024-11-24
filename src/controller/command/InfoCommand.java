@@ -1,6 +1,6 @@
 package controller.command;
 
-import model.World;
+import model.ValorWorld;
 import model.user.hero.Hero;
 import model.user.monster.Monster;
 
@@ -8,9 +8,9 @@ import model.user.monster.Monster;
  * The Move command.
  */
 public class InfoCommand extends KeyboardCommand {
-    private World world;
+    private ValorWorld world;
 
-    public InfoCommand(World world) {
+    public InfoCommand(ValorWorld world) {
         this.world = world;
     }
 

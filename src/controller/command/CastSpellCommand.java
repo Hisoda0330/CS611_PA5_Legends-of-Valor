@@ -3,7 +3,7 @@ package controller.command;
 import java.util.List;
 
 import controller.Input;
-import model.World;
+import model.ValorWorld;
 import model.hero.item.spell.Spell;
 import model.user.hero.Hero;
 import model.user.monster.Monster;
@@ -13,14 +13,14 @@ import model.user.monster.Monster;
  */
 public class CastSpellCommand extends KeyboardCommand {
     private Hero hero;
-    private World world;
+    private ValorWorld world;
 
     /**
      * Constructor.
      *
      * @param hero
      */
-    public CastSpellCommand(Hero hero, World world) {
+    public CastSpellCommand(Hero hero, ValorWorld world) {
         this.hero = hero;
         this.world = world;
     }

@@ -1,6 +1,6 @@
 package controller.command;
 
-import model.World;
+import model.ValorWorld;
 import model.space.Space;
 import model.user.hero.Hero;
 
@@ -9,7 +9,7 @@ import model.user.hero.Hero;
  */
 public class MoveCommand extends KeyboardCommand {
     private Hero hero;
-    private World world;
+    private ValorWorld world;
     private char direction;
 
     /**
@@ -19,7 +19,7 @@ public class MoveCommand extends KeyboardCommand {
      * @param world
      * @param direction
      */
-    public MoveCommand(Hero hero, World world, char direction) {
+    public MoveCommand(Hero hero, ValorWorld world, char direction) {
         this.hero = hero;
         this.world = world;
         this.direction = direction;

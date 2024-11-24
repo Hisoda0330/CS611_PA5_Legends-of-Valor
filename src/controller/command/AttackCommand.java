@@ -4,7 +4,7 @@ import java.util.List;
 
 import controller.Input;
 import model.Dice;
-import model.World;
+import model.ValorWorld;
 import model.user.hero.Hero;
 import model.user.monster.Monster;
 
@@ -14,7 +14,7 @@ import model.user.monster.Monster;
 public class AttackCommand extends KeyboardCommand {
     private Hero hero;
 
-    private World world;
+    private ValorWorld world;
 
     /**
      * Constructor.
@@ -22,7 +22,7 @@ public class AttackCommand extends KeyboardCommand {
      * @param hero
      * @param monster
      */
-    public AttackCommand(Hero hero, World world) {
+    public AttackCommand(Hero hero, ValorWorld world) {
         this.hero = hero;
 
         this.world = world;

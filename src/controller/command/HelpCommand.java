@@ -4,7 +4,6 @@ import static controller.Color.YELLOW;
 import static controller.Color.RED;
 import static controller.Color.PURPLE;
 
-
 /**
  * The Move command.
  */
@@ -67,5 +66,4 @@ public class HelpCommand extends KeyboardCommand {
         System.out.println(text);
         return false;
     }
-
 }

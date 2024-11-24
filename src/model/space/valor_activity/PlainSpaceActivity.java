@@ -1,0 +1,25 @@
+package model.space.valor_activity;
+
+import model.space.Space;
+import model.space.ValorSpaceActivity;
+import model.user.hero.Hero;
+
+/**
+ * Represents an Activity of InaccessibleSpace.
+ */
+public class PlainSpaceActivity implements ValorSpaceActivity {
+
+    @Override
+    public boolean enterAction(Hero hero, Space space) {
+        hero.setSpace(space);
+        System.out.println("\n" + "Hero " + hero.getName() + " enter plain space.");
+
+        return true;
+    }
+
+    @Override
+    public void leftAction(Hero hero) {
+        System.out.println("\n" + "Hero " + hero.getName() + " left plain space.");
+    }
+
+}

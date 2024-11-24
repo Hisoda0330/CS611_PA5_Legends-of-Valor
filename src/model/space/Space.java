@@ -2,6 +2,7 @@ package model.space;
 
 import model.Coordinate;
 import model.user.hero.Hero;
+import model.user.hero.HeroGroup;
 import model.user.monster.Monster;
 
 /**
@@ -17,6 +18,9 @@ public class Space {
     /** action of space */
     private SpaceActivity activity;
 
+    /** action of space */
+    private ValorSpaceActivity valorActivity;
+
     /**
      * Creates a new space.
      *
@@ -30,12 +34,29 @@ public class Space {
         this.type = type;
     }
 
+    /**
+     * Creates a new space.
+     *
+     * @param row
+     * @param col
+     * @param action
+     */
+    public Space(int row, int col, String type, ValorSpaceActivity activity) {
+        this.position = new Coordinate(row, col);
+        this.valorActivity = activity;
+        this.type = type;
+    }
+
+    public void action(HeroGroup heroGroup) {
+        activity.action(heroGroup, this);
+    }
+
     public boolean enterAction(Hero hero, Space space) {
-        return activity.enterAction(hero, space);
+        return valorActivity.enterAction(hero, space);
     }
 
     public void leftAction(Hero hero) {
-        activity.leftAction(hero);
+        valorActivity.leftAction(hero);
     }
 
     public char getSymbol() {
