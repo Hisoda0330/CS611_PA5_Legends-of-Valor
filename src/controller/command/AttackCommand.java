@@ -9,19 +9,13 @@ import model.user.hero.Hero;
 import model.user.monster.Monster;
 
 /**
- * The Move command.
+ * The Move command. Class to represent the attack.
  */
 public class AttackCommand extends KeyboardCommand {
     private Hero hero;
 
     private World world;
 
-    /**
-     * Constructor.
-     *
-     * @param hero
-     * @param monster
-     */
     public AttackCommand(Hero hero, World world) {
         this.hero = hero;
 
@@ -35,7 +29,7 @@ public class AttackCommand extends KeyboardCommand {
     public boolean runCommand() {
         List<Monster> monsters = world.getMonstersInRange(hero.getSpace().getPosition());
 
-        if (monsters.size() == 0) {
+        if (monsters.isEmpty()) {
             System.out.println("No monster in range.");
             return false;
         }

@@ -3,7 +3,7 @@ package controller;
 import java.util.Scanner;
 
 /**
- *
+ The class to handle user input, prompts user to enter correct type of input, such as integer or character.
  */
 public class Input {
     private static Scanner keyboard = new Scanner(System.in);

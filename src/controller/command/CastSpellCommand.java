@@ -9,7 +9,7 @@ import model.user.hero.Hero;
 import model.user.monster.Monster;
 
 /**
- * The Move command.
+ * The Move command. Class to cast spell.
  */
 public class CastSpellCommand extends KeyboardCommand {
     private Hero hero;
