@@ -7,7 +7,8 @@ import model.space.Space;
 import model.user.hero.Hero;
 
 /**
- * The Move command.
+ * The Move command. Transfer one lane to another lane.
+ * Still need to improved.
  */
 public class TeleportCommand extends KeyboardCommand {
     private Hero hero;
