@@ -32,6 +32,9 @@ public class TeleportCommand extends KeyboardCommand {
         targetHeros.remove(hero);
 
         Hero targetHero = select(targetHeros);
+        if (targetHero == null) {
+            return false;
+        }
 
         int row = targetHero.getSpace().getRow();
         int col = targetHero.getSpace().getCol();
