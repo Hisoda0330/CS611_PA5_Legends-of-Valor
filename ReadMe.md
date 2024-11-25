@@ -12,27 +12,37 @@ Member 1:
 - Student ID: U19568777
 
 Member 2:
-- Name: 
-- Email: 
-- Student ID: 
+- Name: Zishuo Liu
+- Email: zsliu@bu.edu
+- Student ID: U22679932
 
 ## Files
 ---------------------------------------------------------------------------
 
-1. Legends_Monsters_and_Heroes folder: Use of the stats files that was provided in blackboard. But with a slightly twist of the attack and defense of the monsters for easier start and debug.
+1. Legends_Monsters_and_Heroes folder: Use of the stats files that was provided in blackboard. But with a slight twist of the attack and defense of the monsters for easier start and debug.
 
 **src/:**
-1. Game.java: Starts the game
+1. Game.java: The interface to start the games
+
+**src/controller:**
+1. AttackCommand.java:
+
+2. CastSpell.java:
+
+3. ChangeArmorCommand
+
 
 **src/controller:**
 
-1. Controller.java: Implement main game controller, manages game world, hero creation, movement controls, and game commands. Also plays music and observe message for display.
+1. Controller.java: Implement main game controller, manages game world, hero creation, movement controls, and commands of game. Also plays music and observe message for display.
 
-2. Input.java: Handles user input, prompts user to enter correct type of input, such as integer or character. 
+2. Input.java: Handles user input, prompts user to enter correct type of input, such as integer or character.
 
 3. MessageObserver.java: Defines an interface for observing messages, respond to messages for display notifications or logs.
 
-4. MusicPlayer.java: PLays background music using audio file music.wav.
+4. MusicPlayer.java: Plays background music using audio file music.wav.
+
+5. Color.java:  Add the necessary bold color to the character display in the screen.
 
 **src/model:**
 
@@ -42,11 +52,11 @@ Member 2:
 
 3. FileLoader.java: Contains a method to load data from a file to read game data. Loading entities, heros, items, spells, etc..
 
-4. World.java: Represents the game world, modeled as an 8x8 grid with different types of space(inaccessible, market, and common). It initialize the world layout. 
+4. World.java: Represents the game world, modeled as an 8x8 grid with different types of space(inaccessible, market, and common). It initialize the world layout.
 
 **src/model/hero/item:**
 
-1. Item.java: Defines an abstract base class for items in game. Each item has a name, price, and level. 
+1. Item.java: Defines an abstract base class for items in game. Each item has a name, price, and level.
 
 2. ItemFactory.java: Declares an ItemFactory interface for creating specific item instances, providing a way to instantiate different item types consistently.
 
@@ -57,7 +67,7 @@ Member 2:
 2. ArmorFactory.java: Implements the ItemFactory interface and provides a factory for creating Armor items. Reads Armory.txt using FileLoader, storing in list of Armor objects.
 
 3. DefenseAble.java: Interface represent item that provide defensive capabilities, like armor.
-   
+
 **src/model/hero/item/potion:**
 
 1. EnhanceAble.java: Interface intended for potions that defines how a potion enhances a hero's attribute.
@@ -65,7 +75,7 @@ Member 2:
 2. Potion.java: Defines the Potion class, exstends Item and implements EnhanceAble. Potions affect specific hero attributes like health, strength, dexterity, and agility.
 
 3. PotionFactory.java: Implements ItemFactory to create Potion objects. Reads potion data from Potion.txt using FileLoader, storing detail on potions and their attribute effects.
-   
+
 **src/model/hero/item/spell:**
 
 1. FireSpell.java: Extends Spell and represents a fire-based spell, magicAttack method reduces monster's defense.
@@ -76,10 +86,10 @@ Member 2:
 
 4. MagicAttackAble.java: An interface with methods that defines behavior for items or abilities that perform magic attacks.
 
-5. Spell.java: An abstract class representing a generic spell, provides attributes for damage and cost, methods for applying magic damage to monster and calculate dmage from hero based on dexterity. 
+5. Spell.java: An abstract class representing a generic spell, provides attributes for damage and cost, methods for applying magic damage to monster and calculate dmage from hero based on dexterity.
 
 6. SpellFactory.java: Implements ItemFactory to create Spell objects. It loads spells from IceSpell.txt, FireSpells.txt, LightningSpells.txt, alternates loading spell from each list.
-   
+
 **src/model/hero/item/weapon:**
 
 1. AttackAble.java: An interface that returns the damage value of an attack-capable item, such as weapon.
@@ -99,7 +109,7 @@ Member 2:
 **src/model/space:**
 
 1. CommonSpaceActivity.java: Defines the behavior in a common space where hero may encounter monsters and engage in battles. If battle occurs, it creates a monster group and manages rounds of combat, and rewards in exp and gold if win.
-                             The class include methods for battle actions, such as hero attacks, spell casting, using potions, and equipping items.
+   The class include methods for battle actions, such as hero attacks, spell casting, using potions, and equipping items.
 
 2. InaccessibleSpaceActivity: Represents an inaccessible space where heroes cannot enter. When attempted, system prompts a message indicating entry not allowed.
 
@@ -119,12 +129,12 @@ Member 2:
 
 **src/model/user/hero:**
 
-1. Hero.java: Extends User to represent a hero with additional attributes(exp,mp,gold,strength,dex.,agility). Also controlls the inventory and equipped items. Also handles leveling up, using potion, equipping items, handling battle prep and outcomes. Hero regain 
-              HP and MP each battle, level up based on exp, and use different equipment to enhance attack and defense.
+1. Hero.java: Extends User to represent a hero with additional attributes(exp,mp,gold,strength,dex.,agility). Also controls the inventory and equipped items. Also handles leveling up, using potion, equipping items, handling battle prep and outcomes. Hero regain
+   HP and MP each battle, level up based on exp, and use different equipment to enhance attack and defense.
 
 2. HeroFactory.java: Implements UserFactory to create Hero instances by reading data files from Warriors.txt, Sorcerers.txt, Paladins.txt and store in a list of heroes. Use createUser() randomly selects and removes a hero from the list.
 
-3. HeroGroup.java: Extends UserGroup to manage a group of heroes, with additional attributes for the current Space and atMarket status. 
+3. HeroGroup.java: Extends UserGroup to manage a group of heroes, with additional attributes for the current Space and atMarket status.
 
 4. HeroIncreaseStrategy.java: An interface defines strategy for increasing hero skills when it levels up. The method increaseSkill(Hero hero) is implemented in specific strategy classes for different hero types.
 
@@ -144,9 +154,9 @@ Member 2:
 
 **src/model/user/monster:**
 
-1. Dragon.java: It represent Dragon type monsters. It inherits from Monster class and passes its stats(name,level,damage,defense,dodge) to the superclass.
+1. Dragon.java: It represents Dragon type monsters. It inherits from Monster class and passes its stats(name,level,damage,defense,dodge) to the superclass.
 
-2. Exoskeleton.java: It represent Exoskeleton type monsters. It inherits from Monster class and passes its stats(name,level,damage,defense,dodge) to the superclass.
+2. Exoskeleton.java: It represents Exoskeleton type monsters. It inherits from Monster class and passes its stats(name,level,damage,defense,dodge) to the superclass.
 
 3. Monster.java: Represents a generic monster with stats for damage, defense, and dodge. It has methods to decrease each attribute by a certain percentage, used when monsters are affected by different types of spells.
 
@@ -154,12 +164,18 @@ Member 2:
 
 5. MonsterGroup.java: Extends UserGroup to manage a group of monsters, specifically formatting the monster group’s details for display.
 
-6. Spirit.java: It represent Spirit type monsters. It inherits from Monster class and passes its stats(name,level,damage,defense,dodge) to the superclass.
+6. Spirit.java: It represents Spirit type monsters. It inherits from Monster class and passes its stats(name,level,damage,defense,dodge) to the superclass.
 
 ## Program Advantages/Notes
 ---------------------------------------------------------------------------
+
+The program support two games: 
+1.Monsters and Heroes 
+2.Legends of Valor
+
+In the second game, the maps need to show only when player pressed I, to show the map.  
 **Game INFO**
-- '*' is the location of hero's party 
+- '*' is the location of hero's party
 - '$' is the location of shop
 - '#' is an unaccessible area
 - '.' is common area where possibly encounter monster
@@ -179,7 +195,7 @@ Member 2:
 2. Adds background story of the game and summuarize the goal of the game.
 3. Provides simple guideline of how to play the game.
 4. Provides easy and simple controlls for the game, allowing user to get start with the game easier.
-5. Validates each user input, preventing the game to crash when player enter wrong input, and prevent it to crash when don't play by the rule. such as going out of the board, or inside the restricted area. 
+5. Validates each user input, preventing the game to crash when player enter wrong input, and prevent it to crash when don't play by the rule. such as going out of the board, or inside the restricted area.
 
 
 **Good OO Design:**
@@ -188,11 +204,11 @@ Member 2:
 2. Each class encapsulates specific attributes and behaviors, so it allows each class to focus on its responsibility and easier management.
 3. Class Hero, Monster, and Item uses inheritance with subclasses(Warrior, Sorcercer, Dragon) inheriting common behaviors and traits.
 4. Use polymorphism to allow the use of interface and abstract classes.(Item, SpaceActivity, UserFactory, etc..) to define behaviors. Allows flexible interaction and behaviors.
-5. Use of design pattern, 
-   - Factory Pattern: (HeroFactory, MonsterFactory, ItemFactory) create their own object without specifying exact class type. With the object creation, it is easy to add new hero type or item without modifying the current code.
-   - Strategy Pattern: (HeroIncreaseStrategy, WarriorIncreaseStrategy, SorcercerSkillIncreaseStrategy) allow vary level up behaviors based on hero type. It is flexible for future behavior change without modifying hero class itself.
-   - Observer Pattern: (MessageObserver interface and notifyMessage method) helps object to receive message about the game event, can be updated or expand mutiple observers in the future. 
-6. The naming of each file represents specific aspect of the game, making it clear and easy to locate within the code. 
+5. Use of design pattern,
+    - Factory Pattern: (HeroFactory, MonsterFactory, ItemFactory) create their own object without specifying exact class type. With the object creation, it is easy to add new hero type or item without modifying the current code.
+    - Strategy Pattern: (HeroIncreaseStrategy, WarriorIncreaseStrategy, SorcercerSkillIncreaseStrategy) allow vary level up behaviors based on hero type. It is flexible for future behavior change without modifying hero class itself.
+    - Observer Pattern: (MessageObserver interface and notifyMessage method) helps object to receive message about the game event, can be updated or expand mutiple observers in the future.
+6. The naming of each file represents specific aspect of the game, making it clear and easy to locate within the code.
 7.  The program is easy to extend with the use of OOD design principles and separation of files within folders help keep methods concise and classes focused.
 
 ## How to compile and run
@@ -200,8 +216,8 @@ Member 2:
 
 1. Navigate to the directory "src" OR (cd src)
 2. Run in src dir:
-   1. javac *.java
-   2. java Game.java
+    1. javac *.java
+    2. java Game
 
 ## Input/Output Example
 ---------------------------------------------------------------------------
