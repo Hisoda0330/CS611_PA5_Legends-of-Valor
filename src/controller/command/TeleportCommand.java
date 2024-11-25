@@ -1,5 +1,6 @@
 package controller.command;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.ValorWorld;
@@ -7,8 +8,7 @@ import model.space.Space;
 import model.user.hero.Hero;
 
 /**
- * The Move command. Transfer one lane to another lane.
- * Still need to improved.
+ * The Move command.
  */
 public class TeleportCommand extends KeyboardCommand {
     private Hero hero;
@@ -24,49 +24,65 @@ public class TeleportCommand extends KeyboardCommand {
         this.world = world;
     }
 
+    private boolean hasMonsterBehind(int row, int col) {
+        col = (col / 3) * 3;
+        for (int i = row; i < 8; i++) {
+            for (int j = col; j < col + 2; j++) {
+                Space space = world.getSpace(i, j);
+                if (space.getMonster() != null) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * Run command.
      */
     @Override
     public boolean runCommand() {
-        List<Hero> targetHeros = world.getHeros();
-        targetHeros.remove(hero);
 
-        Hero targetHero = select(targetHeros);
-        if (targetHero == null) {
+        List<Hero> targetHeros = world.getHeros();
+
+        // find minimum row
+        int minRow = 7;
+        for (Hero hero : targetHeros) {
+            if (hero.getSpace().getRow() < minRow) {
+                minRow = hero.getSpace().getRow();
+            }
+        }
+
+        targetHeros.remove(hero);
+        List<String> coordinates = new ArrayList<String>();
+        for (Hero hero : targetHeros) {
+            int col = hero.getSpace().getCol();
+            col = (col / 3) * 3;
+
+            for (int i = minRow; i < 8; i++) {
+                for (int j = col; j < col + 2; j++) {
+                    Space space = world.getSpace(i, j);
+                    if (space.getHero() == null && !hasMonsterBehind(i, j)) {
+                        coordinates.add(i + "," + j);
+                    }
+                }
+            }
+        }
+
+        if (coordinates.isEmpty()) {
+            System.out.println("No valid target space found.");
             return false;
         }
 
-        int row = targetHero.getSpace().getRow();
-        int col = targetHero.getSpace().getCol();
-        int col1 = (col / 3) * 3;
-        int col2 = col1 + 1;
-        int row2 = row + 1;
-
-        // 3 possible positions
-        // (row, col1) (row, col2), the two position in same row
-        // (row2, col), the space behind the target hero
-        Space space1 = world.getSpace(row, col1);
-        Space space2 = world.getSpace(row, col2);
-        Space space3 = world.getSpace(row2, col);
-
-        if (space1 != null && space1.getHero() == null) {
-            hero.setSpace(space1);
-            System.out.println("Hero " + hero.getName() + " teleport to another nexus.");
-            return true;
+        String coord = select(coordinates);
+        if(coord == null) {
+            return false;
         }
 
-        if (space2 != null && space2.getHero() == null) {
-            hero.setSpace(space2);
-            System.out.println("Hero " + hero.getName() + " teleport to another nexus.");
-            return true;
-        }
-
-        if (space3 != null && space3.getHero() == null) {
-            hero.setSpace(space3);
-            System.out.println("Hero " + hero.getName() + " teleport to another nexus.");
-            return true;
-        }
+        int r = Integer.parseInt(coord.split(",")[0]);
+        int c = Integer.parseInt(coord.split(",")[1]);
+        Space space1 = world.getSpace(r, c);
+        hero.setSpace(space1);
 
         System.out.println("Hero " + hero.getName() + " failed to teleport.");
         return false;

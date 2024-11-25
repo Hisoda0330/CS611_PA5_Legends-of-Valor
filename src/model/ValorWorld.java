@@ -21,6 +21,8 @@ import static controller.Color.GREEN;
 import static controller.Color.PURPLE;
 import static controller.Color.RED;
 import static controller.Color.RESET;
+
+
 /**
  * Represents the game model.
  */
@@ -127,9 +129,8 @@ public class ValorWorld {
         heros.get(1).setSpace(map[7][3]);
         heros.get(2).setSpace(map[7][6]);
         heros.get(0).setLabel(GREEN + "H1"+ RESET);
-        heros.get(1).setLabel(CYAN + "H2"+ RESET); 
+        heros.get(1).setLabel(CYAN + "H2"+ RESET);
         heros.get(2).setLabel(PURPLE + "H3" + RESET);
-
         // set monsters
         monsters = new ArrayList<Monster>();
         monsters.add((Monster) new MonsterFactory(1).createUser());
@@ -138,11 +139,12 @@ public class ValorWorld {
         monsters.get(0).setSpace(map[0][1]);
         monsters.get(1).setSpace(map[0][4]);
         monsters.get(2).setSpace(map[0][7]);
-        monsters.get(0).setLabel(RED+"M1"+RESET);
-        monsters.get(1).setLabel(RED+"M2"+RESET);
-        monsters.get(2).setLabel(RED+"M3"+RESET);
+        monsters.get(0).setLabel(RED+"M1 "+RESET);
+        monsters.get(1).setLabel(RED+"M2 "+RESET);
+        monsters.get(2).setLabel(RED+"M3 "+RESET);
         nextMonsterId = 4;
     }
+    
 
     public void addThreeNewMonsters() {
         int level = getMaxLevelOfHeros();
@@ -282,7 +284,7 @@ public class ValorWorld {
                 s2 += "| ";
 
                 if (symbol == 'I') {
-                    s2 += BLACK +"X X X "+RESET;
+                    s2 += "X X X ";
                 } else {
                     if (space.getHero() != null) {
                         s2 += space.getHero().getLabel();
@@ -303,7 +305,11 @@ public class ValorWorld {
 
                 s2 += "|   ";
             }
-            str += s1 + "\n" + s2 + "\n" + s1 + "\n\n";
+            str += s1 + (i) + "\n" + s2 + "\n" + s1 + "\n\n";
+        }
+
+        for (int j = 0; j < 8; j++) {
+            str += j + "           ";
         }
         return str.trim();
     }
