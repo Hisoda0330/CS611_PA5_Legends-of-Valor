@@ -2,21 +2,18 @@ package model.space;
 
 
 import model.Coordinate;
+import model.ValorWorld;
 import model.World;
 import model.user.hero.Hero;
 
 /**
  * Represents an Activity of InaccessibleSpace.
  */
-public class ObstacleSpaceActivity implements SpaceActivity {
-    private World world;
+public class ObstacleSpaceActivity implements ValorSpaceActivity {
+    private ValorWorld world;
     private Coordinate coordinate;
 
-    /**
-     * @param world
-     * @param coordinate
-     */
-    public ObstacleSpaceActivity(World world, Coordinate coordinate) {
+    public ObstacleSpaceActivity(ValorWorld world, Coordinate coordinate) {
         this.world = world;
         this.coordinate = coordinate;
     }
@@ -30,7 +27,7 @@ public class ObstacleSpaceActivity implements SpaceActivity {
 
     @Override
     public void leftAction(Hero hero) {
-
+        return;
     }
 
 }

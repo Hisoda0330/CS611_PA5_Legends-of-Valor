@@ -12,20 +12,11 @@ public class Coordinate {
         this.col = col;
     }
 
-    /**
-     * Get the row.
-     *
-     * @return the row
-     */
     public int getRow() {
         return row;
     }
 
-    /**
-     * Get the col.
-     *
-     * @return the col
-     */
+
     public int getCol() {
         return col;
     }

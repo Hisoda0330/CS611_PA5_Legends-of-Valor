@@ -9,33 +9,24 @@ import model.user.hero.Hero;
 import model.user.monster.Monster;
 
 /**
- * The Move command.
+ * The Move command. Class to represent the attack function for the heroes. When the user presses the "k".
  */
 public class AttackCommand extends KeyboardCommand {
     private Hero hero;
 
     private ValorWorld world;
 
-    /**
-     * Constructor.
-     *
-     * @param hero
-     * @param monster
-     */
     public AttackCommand(Hero hero, ValorWorld world) {
         this.hero = hero;
 
         this.world = world;
     }
 
-    /**
-     * Run command.
-     */
     @Override
     public boolean runCommand() {
         List<Monster> monsters = world.getMonstersInRange(hero.getSpace().getPosition());
 
-        if (monsters.size() == 0) {
+        if (monsters.isEmpty()) {
             System.out.println("No monster in range.");
             return false;
         }
@@ -46,7 +37,6 @@ public class AttackCommand extends KeyboardCommand {
         int index = Input.enterInt("Select a monster to attack", 1, monsters.size());
         Monster monster = monsters.get(index - 1);
 
-
         System.out.println("\nHero " + hero.getName() + "  vs  " + "Monster " + monster.getName());
         System.out.println(hero.toString());
         System.out.println(monster.toString());
@@ -56,7 +46,6 @@ public class AttackCommand extends KeyboardCommand {
         if (monster.isDefeated()) {
             world.monsterDead(monster);
         }
-
         return true;
     }
 

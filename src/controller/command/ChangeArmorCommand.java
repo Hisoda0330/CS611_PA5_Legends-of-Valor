@@ -6,23 +6,15 @@ import model.hero.item.armor.Armor;
 import model.user.hero.Hero;
 
 /**
- * The Move command.
+ * The Move command.The class for hero to equip the armor.Presses "o"
  */
 public class ChangeArmorCommand extends KeyboardCommand {
     private Hero hero;
 
-    /**
-     * Constructor.
-     *
-     * @param hero
-     */
     public ChangeArmorCommand(Hero hero) {
         this.hero = hero;
     }
 
-    /**
-     * Run command.
-     */
     @Override
     public boolean runCommand() {
         return equipArmor(hero);

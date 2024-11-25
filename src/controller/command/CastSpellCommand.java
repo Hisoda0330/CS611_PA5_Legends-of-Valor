@@ -9,25 +9,18 @@ import model.user.hero.Hero;
 import model.user.monster.Monster;
 
 /**
- * The Move command.
+ * The Move command. Class represents the hero to cast spell.When the user presses the "C".
  */
 public class CastSpellCommand extends KeyboardCommand {
     private Hero hero;
     private ValorWorld world;
 
-    /**
-     * Constructor.
-     *
-     * @param hero
-     */
+
     public CastSpellCommand(Hero hero, ValorWorld world) {
         this.hero = hero;
         this.world = world;
     }
 
-    /**
-     * Run command.
-     */
     @Override
     public boolean runCommand() {
         List<Spell> spells = hero.getInventory().getSpells();
@@ -38,7 +31,7 @@ public class CastSpellCommand extends KeyboardCommand {
 
         List<Monster> monsters = world.getMonstersInRange(hero.getSpace().getPosition());
 
-        if (monsters.size() == 0) {
+        if (monsters.isEmpty()) {
             System.out.println("No monster in range.");
             return false;
         }

@@ -1,6 +1,7 @@
 package model.space;
 
 import model.Coordinate;
+import model.ValorWorld;
 import model.World;
 
 /**
@@ -8,10 +9,9 @@ import model.World;
  */
 public class SpaceFactory {
     private World world;
+    private ValorWorld ValorWorld;
 
-    /**
-     * @param world
-     */
+
     public SpaceFactory(World world) {
         this.world = world;
     }
@@ -31,7 +31,8 @@ public class SpaceFactory {
         case "Koulou":
             return new Space(row, col, type, new KoulouSpaceActivity());
         case "Obstacle":
-            return new Space(row, col, type, new ObstacleSpaceActivity(world, new Coordinate(row, col)));
+
+            return new Space(row, col, type, new ObstacleSpaceActivity(ValorWorld, new Coordinate(row, col)));
         default:
             System.err.println("Error in SpaceFactory.");
             return null;

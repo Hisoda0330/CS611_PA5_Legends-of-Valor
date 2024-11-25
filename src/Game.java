@@ -4,14 +4,11 @@ import controller.Input;
 import controller.ValorController;
 import static controller.Color.BLACK;
 import static controller.Color.BLUE;
-import static controller.Color.CYAN;
-import static controller.Color.GREEN;
-import static controller.Color.PURPLE;
 import static controller.Color.RED;
 import static controller.Color.RESET;
 import static controller.Color.YELLOW;
 /**
- * The main class.
+ * The main class to play game.
  */
 public class Game {
     public static void main(String[] args) {

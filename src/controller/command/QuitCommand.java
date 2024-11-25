@@ -3,7 +3,7 @@ package controller.command;
 import model.ValorWorld;
 
 /**
- * The Move command.
+ * The Quit command.When user presses "Q".
  */
 public class QuitCommand extends KeyboardCommand {
     private ValorWorld world;
@@ -12,9 +12,6 @@ public class QuitCommand extends KeyboardCommand {
         this.world = world;
     }
 
-    /**
-     * Run command.
-     */
     @Override
     public boolean runCommand() {
         world.setGameover(true);

@@ -9,7 +9,8 @@ import model.user.hero.HeroFactory;
 import model.user.hero.HeroGroup;
 
 /**
- *
+ *Implement main game controller, manages game world, hero creation, movement controls, and commands of game.
+ * Also plays music and observe message for display.
  */
 public class Controller implements MessageObserver, IController {
 
@@ -70,11 +71,6 @@ public class Controller implements MessageObserver, IController {
 
         MusicPlayer.stop();
     }
-
-    /**
-     * @param control
-     *
-     */
     private void move(char control) {
         // move up
         Space space = world.getHeroGroup().getSpace();

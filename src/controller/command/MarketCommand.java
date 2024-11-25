@@ -6,25 +6,18 @@ import model.market.Market;
 import model.user.hero.Hero;
 
 /**
- * The Move command.
+ * The class to represent the market, market only set in the Nexus place.Stimulate when user pressed the "m".
  */
 public class MarketCommand extends KeyboardCommand {
     private Hero hero;
     private Market market;
 
-    /**
-     * Constructor.
-     *
-     * @param hero
-     */
     public MarketCommand(Hero hero, Market market) {
         this.hero = hero;
         this.market = market;
     }
 
-    /**
-     * Run command.
-     */
+
     @Override
     public boolean runCommand() {
         if (!hero.isAtMarket()) {
@@ -47,9 +40,6 @@ public class MarketCommand extends KeyboardCommand {
         }
     }
 
-    /**
-     * @param hero
-     */
     private void buy(Hero hero) {
         if (market.size() == 0) {
             hero.notifyMessage("The market is empty.");
@@ -83,9 +73,6 @@ public class MarketCommand extends KeyboardCommand {
         }
     }
 
-    /**
-     * @param hero
-     */
     private void sell(Hero hero) {
         if (hero.getInventory().size() == 0) {
             hero.notifyMessage("Your inventory is empty.");

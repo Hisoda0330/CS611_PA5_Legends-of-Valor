@@ -6,23 +6,15 @@ import model.hero.item.potion.Potion;
 import model.user.hero.Hero;
 
 /**
- * The Move command.
+ * The class for heroes to use the potion.When the user presses the "U".
  */
 public class UsePotionCommand extends KeyboardCommand {
     private Hero hero;
 
-    /**
-     * Constructor.
-     *
-     * @param hero
-     */
     public UsePotionCommand(Hero hero) {
         this.hero = hero;
     }
 
-    /**
-     * Run command.
-     */
     @Override
     public boolean runCommand() {
         List<Potion> potions = hero.getInventory().getPotions();

@@ -4,23 +4,15 @@ import model.space.Space;
 import model.user.hero.Hero;
 
 /**
- * The Move command.
+ * The class for hero came back to the Nexus. User need to press "r".
  */
 public class RecallCommand extends KeyboardCommand {
     private Hero hero;
 
-    /**
-     * Constructor.
-     *
-     * @param hero
-     */
     public RecallCommand(Hero hero) {
         this.hero = hero;
     }
 
-    /**
-     * Run command.
-     */
     @Override
     public boolean runCommand() {
         Space spawnSpace = hero.getSpawnSpace();

@@ -8,30 +8,22 @@ import model.user.hero.Hero;
 import model.user.monster.Monster;
 
 /**
- * The Move command.
+ * Attack class for the monsters.
  */
 public class MonsterAttackCommand extends KeyboardCommand {
     private Monster monster;
     private ValorWorld world;
 
-    /**
-     * Constructor.
-     *
-     * @param hero
-     * @param monster
-     */
+
     public MonsterAttackCommand(Monster monster, ValorWorld world) {
         this.monster = monster;
         this.world = world;
     }
 
-    /**
-     * Run command.
-     */
     @Override
     public boolean runCommand() {
         List<Hero> heros = world.getHerosInRange(monster.getSpace().getPosition());
-        if (heros.size() == 0) {
+        if (heros.isEmpty()) {
             return false;
         }
 
@@ -45,10 +37,6 @@ public class MonsterAttackCommand extends KeyboardCommand {
         return true;
     }
 
-    /**
-     * @param hero
-     * @param monster
-     */
     private boolean monsterAttack(Hero hero, Monster monster) {
         double dodgeChange = hero.getAgility() * 0.002 / 100.0;
 

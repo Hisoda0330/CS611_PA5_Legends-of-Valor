@@ -5,7 +5,7 @@ import model.user.hero.Hero;
 /**
  * NexusSpaceActivity
  */
-public class NexusSpaceActivity implements SpaceActivity {
+public class NexusSpaceActivity implements ValorSpaceActivity {
 
     @Override
     public boolean enterAction(Hero hero, Space space) {

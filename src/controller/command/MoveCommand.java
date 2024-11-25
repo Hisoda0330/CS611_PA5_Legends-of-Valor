@@ -5,29 +5,19 @@ import model.space.Space;
 import model.user.hero.Hero;
 
 /**
- * The Move command.
+ * The Heroes' Move command .Control left, right, forward, back, through  a, d, w, s
  */
 public class MoveCommand extends KeyboardCommand {
     private Hero hero;
     private ValorWorld world;
     private char direction;
 
-    /**
-     * Constructor.
-     *
-     * @param hero
-     * @param world
-     * @param direction
-     */
     public MoveCommand(Hero hero, ValorWorld world, char direction) {
         this.hero = hero;
         this.world = world;
         this.direction = direction;
     }
 
-    /**
-     * Run command.
-     */
     @Override
     public boolean runCommand() {
         // move up

@@ -15,14 +15,13 @@ import model.user.monster.Monster;
 import model.user.monster.MonsterFactory;
 
 import static controller.Color.BLACK;
-import static controller.Color.BLUE;
 import static controller.Color.CYAN;
 import static controller.Color.GREEN;
 import static controller.Color.PURPLE;
 import static controller.Color.RED;
 import static controller.Color.RESET;
 /**
- * Represents the game model.
+ * Represents the game model, for ValorofLegends
  */
 public class ValorWorld {
     private int nextMonsterId = 1;
@@ -107,7 +106,7 @@ public class ValorWorld {
         }
 
         // add plain
-        while (positions.size() > 0) {
+        while (!positions.isEmpty()) {
             int[] position = positions.remove(0);
             map[position[0]][position[1]] = factory.createSpace(position[0], position[1], "Plain");
         }
@@ -126,9 +125,9 @@ public class ValorWorld {
         heros.get(0).setSpace(map[7][0]);
         heros.get(1).setSpace(map[7][3]);
         heros.get(2).setSpace(map[7][6]);
-        heros.get(0).setLabel(GREEN + "H1"+ RESET);
-        heros.get(1).setLabel(CYAN + "H2"+ RESET); 
-        heros.get(2).setLabel(PURPLE + "H3" + RESET);
+        heros.get(0).setLabel(GREEN + "H1 "+ RESET);
+        heros.get(1).setLabel(CYAN + "H2 "+ RESET);
+        heros.get(2).setLabel(PURPLE + "H3 " + RESET);
 
         // set monsters
         monsters = new ArrayList<Monster>();
@@ -138,9 +137,9 @@ public class ValorWorld {
         monsters.get(0).setSpace(map[0][1]);
         monsters.get(1).setSpace(map[0][4]);
         monsters.get(2).setSpace(map[0][7]);
-        monsters.get(0).setLabel(RED+"M1"+RESET);
-        monsters.get(1).setLabel(RED+"M2"+RESET);
-        monsters.get(2).setLabel(RED+"M3"+RESET);
+        monsters.get(0).setLabel(RED+"M1 "+RESET);
+        monsters.get(1).setLabel(RED+"M2 "+RESET);
+        monsters.get(2).setLabel(RED+"M3 "+RESET);
         nextMonsterId = 4;
     }
 
@@ -175,45 +174,23 @@ public class ValorWorld {
         }
     }
 
-    /**
-     * Set the gameover.
-     *
-     * @param gameover the gameover to set
-     */
     public void setGameover(boolean gameover) {
         this.gameover = gameover;
     }
 
-    /**
-     * Get the gameover.
-     *
-     * @return the gameover
-     */
     public boolean isGameover() {
         return gameover;
     }
 
-    /**
-     * Get the heros.
-     *
-     * @return the heros
-     */
     public List<Hero> getHeros() {
         return new ArrayList<Hero>(heros);
     }
 
-    /**
-     * Get the monsters.
-     *
-     * @return the monsters
-     */
+
     public List<Monster> getMonsters() {
         return new ArrayList<Monster>(monsters);
     }
 
-    /**
-     *
-     */
     public void beforeTurn() {
         System.out.println();
 
@@ -224,9 +201,6 @@ public class ValorWorld {
         }
     }
 
-    /**
-     *
-     */
     public void endTurn() {
         System.out.println();
 
@@ -247,11 +221,7 @@ public class ValorWorld {
         }
     }
 
-    /**
-     * Get the markets.
-     *
-     * @return the markets
-     */
+
     public Market[] getMarkets() {
         return markets;
     }
@@ -282,7 +252,7 @@ public class ValorWorld {
                 s2 += "| ";
 
                 if (symbol == 'I') {
-                    s2 += BLACK +"X X X "+RESET;
+                    s2 +=  "X X X ";
                 } else {
                     if (space.getHero() != null) {
                         s2 += space.getHero().getLabel();
@@ -305,6 +275,9 @@ public class ValorWorld {
             }
             str += s1 + "\n" + s2 + "\n" + s1 + "\n\n";
         }
+        for (int j = 0; j < 8; j++) {
+            str += j + "           ";
+        }
         return str.trim();
     }
 
@@ -324,9 +297,7 @@ public class ValorWorld {
         return map.length;
     }
 
-    /**
-     * @param monster
-     */
+
     public void monsterDead(Monster monster) {
         monsters.remove(monster);
         monster.getSpace().setMonster(null);
@@ -338,12 +309,6 @@ public class ValorWorld {
         }
     }
 
-    /**
-     * Get the monsters in range.
-     *
-     * @param position the hero's position
-     * @return monsters in range.
-     */
     public List<Monster> getMonstersInRange(Coordinate position) {
         List<Monster> monsters = new ArrayList<Monster>();
 
@@ -358,12 +323,6 @@ public class ValorWorld {
         return monsters;
     }
 
-    /**
-     * Get the heros in range.
-     *
-     * @param position the monster's position
-     * @return heros in range.
-     */
     public List<Hero> getHerosInRange(Coordinate position) {
         List<Hero> heros = new ArrayList<Hero>();
         for (int dr = -1; dr <= 1; dr++) {
@@ -377,48 +336,25 @@ public class ValorWorld {
         return heros;
     }
 
-    /**
-     * Set the heroWin.
-     *
-     * @param heroWin the heroWin to set
-     */
     public void setHeroWin() {
         this.heroWin = true;
         gameover = true;
     }
 
-    /**
-     * Set the monsterWin.
-     *
-     * @param monsterWin the monsterWin to set
-     */
     public void setMonsterWin() {
         this.monsterWin = true;
         gameover = true;
     }
 
-    /**
-     * Get the heroWin.
-     *
-     * @return the heroWin
-     */
     public boolean isHeroWin() {
         return heroWin;
     }
 
-    /**
-     * Get the monsterWin.
-     *
-     * @return the monsterWin
-     */
+
     public boolean isMonsterWin() {
         return monsterWin;
     }
 
-    /**
-     * @param row
-     * @param col
-     */
     public void setPlainSpace(int row, int col) {
         map[row][col] = new Space(row, col, "Plain", new PlainSpaceActivity());
     }

@@ -1,5 +1,5 @@
 package controller;
-
+//Plays background music using audio file music.wav.
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioInputStream;

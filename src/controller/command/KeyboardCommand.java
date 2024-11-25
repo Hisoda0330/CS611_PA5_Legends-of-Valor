@@ -5,13 +5,10 @@ import java.util.List;
 import controller.Input;
 
 /**
- * The interface for all keyboard commands.
+ * The interface for all keyboard commands. The superclass
  */
 public abstract class KeyboardCommand {
 
-    /**
-     * Run command.
-     */
     public abstract boolean runCommand();
 
     public <T> T select(List<T> list) {

@@ -5,13 +5,10 @@ import static controller.Color.RED;
 import static controller.Color.PURPLE;
 
 /**
- * The Move command.
+ * The introduction to the game.When user presses the "h".
  */
 public class HelpCommand extends KeyboardCommand {
 
-    /**
-     * Run command.
-     */
     @Override
     public boolean runCommand() {
         String text = "";

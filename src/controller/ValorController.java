@@ -20,7 +20,7 @@ import model.user.hero.Hero;
 import model.user.monster.Monster;
 
 /**
- *
+ *The controller for play the ValorController
  */
 public class ValorController implements MessageObserver, IController {
 
@@ -29,9 +29,7 @@ public class ValorController implements MessageObserver, IController {
 
     private int everyRoundsForMonster = 8; // every 8 rounds, add monster
 
-    /**
-     *
-     */
+   //The start page for the Valor
     public ValorController() {
         world = new ValorWorld();
 

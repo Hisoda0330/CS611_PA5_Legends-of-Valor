@@ -5,7 +5,7 @@ import model.user.hero.Hero;
 import model.user.monster.Monster;
 
 /**
- * The Move command.
+ * The class to show the information:when pressed the i, SHOW the information of heroes and monsters.
  */
 public class InfoCommand extends KeyboardCommand {
     private ValorWorld world;
@@ -14,9 +14,6 @@ public class InfoCommand extends KeyboardCommand {
         this.world = world;
     }
 
-    /**
-     * Run command.
-     */
     @Override
     public boolean runCommand() {
         System.out.println(world.toString() + "\n");

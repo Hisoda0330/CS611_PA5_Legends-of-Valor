@@ -5,7 +5,7 @@ import model.user.hero.Hero;
 /**
  * Represents an Activity of InaccessibleSpace.
  */
-public class PlainSpaceActivity implements SpaceActivity {
+public class PlainSpaceActivity implements ValorSpaceActivity {
 
     @Override
     public boolean enterAction(Hero hero, Space space) {

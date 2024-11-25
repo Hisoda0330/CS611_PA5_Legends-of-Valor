@@ -6,7 +6,7 @@ import model.user.hero.Hero;
 /**
  * Represents an Activity of InaccessibleSpace.
  */
-public class InaccessibleSpaceActivity implements SpaceActivity {
+public class InaccessibleSpaceActivity implements ValorSpaceActivity {
 
     @Override
     public boolean enterAction(Hero hero, Space space) {
@@ -16,7 +16,7 @@ public class InaccessibleSpaceActivity implements SpaceActivity {
 
     @Override
     public void leftAction(Hero hero) {
-
+        return;
     }
 
 }

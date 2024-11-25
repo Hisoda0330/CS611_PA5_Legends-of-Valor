@@ -3,19 +3,12 @@ package controller;
 import java.util.Scanner;
 
 /**
- *
+ *Handles user input, prompts user to enter correct type of input, such as integer or character.
  */
 public class Input {
     private static Scanner keyboard = new Scanner(System.in);
 
-    /**
-     * Prompt user to enter an integer.
-     *
-     * @param prompt prompt message
-     * @param min    the minimum value
-     * @param max    the maximum value
-     * @return an integer.
-     */
+
     public static int enterInt(String prompt, int min, int max) {
         while (true) {
             System.out.print(prompt + ": ");

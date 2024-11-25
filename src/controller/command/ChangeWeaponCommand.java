@@ -6,23 +6,15 @@ import model.hero.item.weapon.Weapon;
 import model.user.hero.Hero;
 
 /**
- * The Move command.
+ * The Move command.Class for heroes to equip weapon.Presses "e"
  */
 public class ChangeWeaponCommand extends KeyboardCommand {
     private Hero hero;
 
-    /**
-     * Constructor.
-     *
-     * @param hero
-     */
     public ChangeWeaponCommand(Hero hero) {
         this.hero = hero;
     }
 
-    /**
-     * Run command.
-     */
     @Override
     public boolean runCommand() {
         return equipWeapon(hero);
