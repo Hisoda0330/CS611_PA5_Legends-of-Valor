@@ -239,7 +239,11 @@ In the second game, the maps need to show only when player pressed I, to show th
     - Factory Pattern: (HeroFactory, MonsterFactory, ItemFactory) create their own object without specifying exact class type. With the object creation, it is easy to add new hero type or item without modifying the current code.
     - Strategy Pattern: (HeroIncreaseStrategy, WarriorIncreaseStrategy, SorcercerSkillIncreaseStrategy) allow vary level up behaviors based on hero type. It is flexible for future behavior change without modifying hero class itself.
     - Observer Pattern: (MessageObserver interface and notifyMessage method) helps object to receive message about the game event, can be updated or expand mutiple observers in the future.
-    - Command Pattern: A behavioral design pattern in command folder where it 
+    - Command Pattern: A behavioral design pattern in command folder where it encapsulates the specific operation such as moving, attacking, or iteracting with market.
+        - KeyboardCommand lets user dynamically choose from options, such select item to buy/sell or monster to attack. 
+        - TeleportCommand handles teleporting a hero to another space without altering the world structure
+        - ChangeArmorCommand or CastSpellCommand, involves minimal changes to existing code. You only need to implement the command-specific behavior while adhering to the KeyboardCommand interface​(ChangeArmorCommand)​(CastSpellCommand).
+        - Adheres to the Open/Closed Principle(open for extension, closed for modification), new commands can be integrated without disrupting existing functionality.
 6. The naming of each file represents specific aspect of the game, making it clear and easy to locate within the code.
 7.  The program is easy to extend with the use of OOD design principles and separation of files within folders help keep methods concise and classes focused.
 8. THe map use "I" to display, to save the space. 
