@@ -239,6 +239,7 @@ In the second game, the maps need to show only when player pressed I, to show th
     - Factory Pattern: (HeroFactory, MonsterFactory, ItemFactory) create their own object without specifying exact class type. With the object creation, it is easy to add new hero type or item without modifying the current code.
     - Strategy Pattern: (HeroIncreaseStrategy, WarriorIncreaseStrategy, SorcercerSkillIncreaseStrategy) allow vary level up behaviors based on hero type. It is flexible for future behavior change without modifying hero class itself.
     - Observer Pattern: (MessageObserver interface and notifyMessage method) helps object to receive message about the game event, can be updated or expand mutiple observers in the future.
+    - Command Pattern: A behavioral design pattern in command folder where it 
 6. The naming of each file represents specific aspect of the game, making it clear and easy to locate within the code.
 7.  The program is easy to extend with the use of OOD design principles and separation of files within folders help keep methods concise and classes focused.
 8. THe map use "I" to display, to save the space. 
